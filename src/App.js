@@ -4,6 +4,7 @@ import NotFound from "./Components/NotFound";
 import Navbar from "./Components/Navbar";
 import "./index.css";
 import AddNote from "./Components/AddNote";
+import NoteDetails from "./Components/NoteDetails";
 
 function App() {
 return (
@@ -14,6 +15,7 @@ return (
                 <Routes>
                     <Route path="/" element={<ListNotes/>}/>
                     <Route path="/add" element={<AddNote/>}/>
+                    <Route path="/note/:id" element={<NoteDetails/>}/>
                     <Route exact path="*" element={<NotFound/>}/>
                 </Routes>
         </div>

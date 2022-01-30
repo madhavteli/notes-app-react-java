@@ -8,4 +8,8 @@ const addNote = (note) => {
 	return httpClient.post("/createNote", note);
 }
 
-export default { getAll, addNote };
+const readNote = (id) => {
+	return httpClient.get('/note/'+id);
+}
+
+export default { getAll, addNote, readNote };
