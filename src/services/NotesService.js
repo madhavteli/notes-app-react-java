@@ -16,4 +16,8 @@ const deleteNote = ( id ) => {
 	return httpClient.delete(`/note/${id}`);
 }
 
-export default { getAll, addNote, readNote, deleteNote };
+const updateNote = note => {
+	return httpClient.put("updateNote", note)
+}
+
+export default { getAll, addNote, readNote, deleteNote, updateNote };

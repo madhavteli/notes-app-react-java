@@ -25,6 +25,10 @@ const NoteDetails = () => {
 		})
 	}
 
+	const editNoteHandler = () => {
+		history(`/updateNote/${id}`);
+	}
+
 	return(
 		<div className="note-details main-content">
 			<article>
@@ -35,7 +39,8 @@ const NoteDetails = () => {
 				</div>
 				<div className="mb-3">{note.body}</div>
 			</article>
-			<button onClick={deleteClickHandler}>Delete</button>
+			<button onClick={editNoteHandler}>Edit</button>
+			<button onClick={deleteClickHandler} className="ms-3">Delete</button>
 		</div>
 	)
 }

@@ -15,6 +15,7 @@ return (
                 <Routes>
                     <Route path="/" element={<ListNotes/>}/>
                     <Route path="/add" element={<AddNote/>}/>
+                    <Route path="/updateNote/:id" element={<AddNote/>}/>
                     <Route path="/note/:id" element={<NoteDetails/>}/>
                     <Route exact path="*" element={<NotFound/>}/>
                 </Routes>
