@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import NotesService from "../services/NotesService";
+import Moment from "react-moment";
 
 const NoteDetails = () => {
 
@@ -31,16 +32,21 @@ const NoteDetails = () => {
 
 	return(
 		<div className="note-details main-content">
-			<article>
-				<h5 className="text-capitalize primary-color">{note.title}</h5>
-				<div className="mb-3 font-italic metadata">
-					<span>{note.updated_at}</span>
-					<span className="text-capitalize">, {note.category}</span>
+			{
+				note &&
+				<div>
+					<article>
+						<h5 className="text-capitalize primary-color">{note.title}</h5>
+						<div className="mb-3 fst-italic metadata">
+							<Moment fromNow>{note.updated_at}</Moment>
+							<span className="text-capitalize">, {note.category}</span>
+						</div>
+						<div className="mb-3">{note.body}</div>
+					</article>
+					<button onClick={editNoteHandler}>Edit</button>
+					<button onClick={deleteClickHandler} className="ms-3">Delete</button>
 				</div>
-				<div className="mb-3">{note.body}</div>
-			</article>
-			<button onClick={editNoteHandler}>Edit</button>
-			<button onClick={deleteClickHandler} className="ms-3">Delete</button>
+			}
 		</div>
 	)
 }
