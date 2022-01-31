@@ -1,11 +1,12 @@
 import {useState, useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NotesService from "../services/NotesService";
 
 const NoteDetails = () => {
 
 	const {id} = useParams();
 	const [note, setNote] = useState('');
+	const history = useNavigate();
 
 	useEffect(()=>{
 		NotesService.readNote(id).then(note=>{
@@ -14,6 +15,15 @@ const NoteDetails = () => {
 			console.log('Something went wrong', error);
 		})
 	},[])
+
+	const deleteClickHandler = () => {
+		NotesService.deleteNote(id).then(()=>{
+			console.log("Note deleted succesfully!");
+			history("/");
+		}).catch((error)=>{
+			console.log(error);
+		})
+	}
 
 	return(
 		<div className="note-details main-content">
@@ -25,6 +35,7 @@ const NoteDetails = () => {
 				</div>
 				<div className="mb-3">{note.body}</div>
 			</article>
+			<button onClick={deleteClickHandler}>Delete</button>
 		</div>
 	)
 }

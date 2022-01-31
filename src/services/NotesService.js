@@ -9,7 +9,11 @@ const addNote = (note) => {
 }
 
 const readNote = (id) => {
-	return httpClient.get('/note/'+id);
+	return httpClient.get(`/note/${id}`);
 }
 
-export default { getAll, addNote, readNote };
+const deleteNote = ( id ) => {
+	return httpClient.delete(`/note/${id}`);
+}
+
+export default { getAll, addNote, readNote, deleteNote };
