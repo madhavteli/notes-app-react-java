@@ -7,13 +7,20 @@ const AddNote = () => {
 	const[title, setTitle] = useState('');
 	const[body, setBody] = useState('');
 	const[category, setCategory] = useState('Programming');
+	const[error, setError] = useState( false );
 
 	const history = useNavigate();
 	const {id} = useParams();
 
 	const addNoteHandler = event => {
 		event.preventDefault();
-		const data = {title, body, category};
+		if( !title || !body ) {
+			setError( true );
+			return;
+		} else {
+			setError( false );
+		}
+		const data = {title, body, category, id};
 		if( id ) {
 			NotesService.updateNote( data ).then( ( response ) => {
 				console.log( "Note Updated successfully" );
@@ -50,10 +57,11 @@ const AddNote = () => {
 			<div className="create">
 				<div className="text-center">
 					<h5>{id ? "Update Note" : "Add Note"}</h5>
+					{error &&  <span style={{color:"red", fontStyle:"italic"}}>Please enter required fields</span>}
 				</div>
 				<form>
 					<div className="form-group">
-						<label>Title: </label>
+						<label>Title: <sup>*</sup></label>
 						<input type="text"
 						       id="title"
 						       value={title}
@@ -61,7 +69,7 @@ const AddNote = () => {
 						       className="form-control"/>
 					</div>
 					<div className="form-group">
-						<label>Body: </label>
+						<label>Body: <sup>*</sup></label>
 						<textarea
 							className="form-control"
 							id="note_body"
